@@ -50,10 +50,7 @@ class InvoiceController extends Controller
     }
     public function destroy($id){
             $invoice = Invoice::findOrFail($id);
-            
-            // Delete the invoice
             $invoice->delete();
-            
             return response()->json(['success' => 'Invoice deleted successfully']);
         }
 }

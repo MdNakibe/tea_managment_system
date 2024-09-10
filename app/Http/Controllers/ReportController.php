@@ -24,14 +24,12 @@ class ReportController extends Controller
             'tea_packets.*',
             'invoices.*'
         )
-        ->first(); // Adjust this according to your model and query
+        ->first(); 
 
         if ($data) {
-            // Pass the product data to the Blade view
             return view('backend.productPeaking.report', compact('data'));
         }
     
-        // Return a view with an error message if product not found
         return view('backend.productPeaking.report', ['error' => 'Product not found']);
     }
 }

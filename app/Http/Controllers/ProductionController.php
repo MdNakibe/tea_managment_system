@@ -17,20 +17,16 @@ class ProductionController extends Controller
         public function store(Request $request)
         {
             $request->validate([
-                'tea_packets' => 'required|array', // Array of tea packet IDs
-                'weights' => 'required|array', // Array of corresponding weights
+                'tea_packets' => 'required|array', 
+                'weights' => 'required|array', 
             ]);
 
             $totalWeight = array_sum($request->weights);
-
-            // Create a new production record
             $production = Production::create([
                 'production_code' => uniqid('prod_'),
                 'total_weight' => $totalWeight,
                 'stock_in' => $totalWeight,
             ]);
-
-            // Loop through selected tea packets and weights
             foreach ($request->tea_packets as $index => $teaPacketId) {
                 $teaPacket = TeaPacket::findOrFail($teaPacketId);
                 $weightTaken = $request->weights[$index];
